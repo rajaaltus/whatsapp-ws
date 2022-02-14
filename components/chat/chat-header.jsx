@@ -18,7 +18,7 @@ const ChatHeader = () => {
         <div className="flex items-center justify-start space-x-2">
           <div className="w-12 h-12 rounded-full bg-gray-400"></div>
           <div>
-            <p className="text-sm">Princy Annie Laos</p>
+            <p className="text-sm">John Doe</p>
             <p className="text-xs text-gray-500">Online</p>
           </div>
         </div>
