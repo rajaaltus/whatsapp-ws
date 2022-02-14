@@ -1,12 +1,14 @@
 import { CameraIcon, MicrophoneIcon, PlusIcon } from "@heroicons/react/outline";
 import React, { useRef, useState } from "react";
 
-const ChatInput = () => {
+const ChatInput = ({ sendMessage }) => {
   const inputRef = useRef("");
   const [message, setMessage] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     setMessage(inputRef.current.value);
+    sendMessage(inputRef.current.value);
+    inputRef.current.value = "";
   };
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
@@ -14,12 +16,10 @@ const ChatInput = () => {
       setMessage("");
     }
   };
+
   return (
     <div className="absolute bottom-0 left-0 w-full bg-black py-4">
-      <form
-        className="flex items-center justify-between w-full space-x-4 px-4"
-        onSubmit={(e) => handleSubmit(e)}
-      >
+      <div className="flex items-center justify-between w-full space-x-4 px-4">
         <PlusIcon className="w-6 text-indigo-500" />
         <input
           type="text"
@@ -33,7 +33,7 @@ const ChatInput = () => {
           <CameraIcon className="w-6 text-indigo-500" />
           <MicrophoneIcon className="w-6 text-indigo-500" />
         </div>
-      </form>
+      </div>
     </div>
   );
 };

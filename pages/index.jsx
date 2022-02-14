@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
 import { chatData } from "../lib/ChatData";
-
-function HomePage() {
+import { io } from "socket.io-client";
+import { getSession, signOut } from "next-auth/react";
+function HomePage({ user }) {
   const router = useRouter();
+  const socket = io("ws://localhost:8080");
   const handleClick = (id) => {
     router.push(`/${id}`);
   };
@@ -23,6 +25,7 @@ function HomePage() {
           />
         ))}
       </div>
+      <button onClick={signOut}>Logout</button>
     </>
   );
 }
@@ -46,3 +49,17 @@ function ContactItem({ name, message, handleClick }) {
     </button>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    context.res.writeHead(302, { Location: "/login" });
+    context.res.end();
+    return {};
+  }
+  return {
+    props: {
+      user: session.user,
+    },
+  };
+};
