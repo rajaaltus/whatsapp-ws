@@ -8,7 +8,7 @@ import Image from "next/image";
 const ContactChat = () => {
   const { data } = useSession();
   const [message, setMessage] = useState([]);
-  const socket = io(`${process.env.WS_URL}:9000`);
+  const socket = io("https://altus-ws.herokuapp.com:9000");
 
   const handleMessage = (msg) => {
     if (data) {

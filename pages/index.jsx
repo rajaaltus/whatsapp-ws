@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { getSession, signOut } from "next-auth/react";
 function HomePage({ user }) {
   const router = useRouter();
-  const socket = io(`${process.env.WS_URL}:9000`);
+  const socket = io("https://altus-ws.herokuapp.com:9000");
   const handleClick = (id) => {
     router.push(`/${id}`);
   };
