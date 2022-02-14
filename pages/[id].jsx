@@ -8,7 +8,7 @@ import Image from "next/image";
 const ContactChat = () => {
   const { data } = useSession();
   const [message, setMessage] = useState([]);
-  const socket = io("ws://localhost:8080");
+  const socket = io(`${process.env.WS_URL}:9000`);
 
   const handleMessage = (msg) => {
     if (data) {

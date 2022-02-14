@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { getSession, signOut } from "next-auth/react";
 function HomePage({ user }) {
   const router = useRouter();
-  const socket = io("ws://localhost:8080");
+  const socket = io(`${process.env.WS_URL}:9000`);
   const handleClick = (id) => {
     router.push(`/${id}`);
   };
